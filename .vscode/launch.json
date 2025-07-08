@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "redial",
+            "name": "redial22",
             "type": "python",
             "request": "launch",
-            "module": "redial",
+            "module": "redial22",
             "cwd": "${workspaceFolder}/src"
         }
     ]

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-    Setup file for redial.
+    Setup file for redial22.
     Use setup.cfg to configure your project.
 
     This file was generated with PyScaffold 3.1.

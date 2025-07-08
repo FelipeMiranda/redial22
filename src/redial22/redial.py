@@ -3,15 +3,15 @@ import signal
 import typing
 
 import urwid
-from redial.config import Config
-from redial.hostinfo import HostInfo
-from redial.tree.node import Node
-from redial.ui.dialog import AddHostDialog, MessageDialog, AddFolderDialog, RemoveHostDialog, CopySSHKeyDialog, RemoveFolderDialog
-from redial.ui.footer import init_footer
-from redial.ui.tree import UIParentNode, UITreeWidget, UITreeNode, UITreeListBox, State
-from redial.ui.palette import palette
-from redial.utils import package_available, get_public_ssh_keys
-from redial.uistate import save_ui_state, restore_ui_state
+from redial22.config import Config
+from redial22.hostinfo import HostInfo
+from redial22.tree.node import Node
+from redial22.ui.dialog import AddHostDialog, MessageDialog, AddFolderDialog, RemoveHostDialog, CopySSHKeyDialog, RemoveFolderDialog
+from redial22.ui.footer import init_footer
+from redial22.ui.tree import UIParentNode, UITreeWidget, UITreeNode, UITreeListBox, State
+from redial22.ui.palette import palette
+from redial22.utils import package_available, get_public_ssh_keys
+from redial22.uistate import save_ui_state, restore_ui_state
 from functools import partial
 
 
@@ -27,7 +27,7 @@ class RedialApplication:
         restore_ui_state(self.listbox, self.sessions)
 
         urwid.connect_signal(self.walker, "modified", lambda: on_focus_change(self.listbox))
-        header = urwid.Text("Redial")
+        header = urwid.Text("redial22")
         footer = init_footer(self.listbox)
 
         self.view = urwid.Frame(

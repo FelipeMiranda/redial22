@@ -1,4 +1,4 @@
-from redial.hostinfo import HostInfo
+from redial22.hostinfo import HostInfo
 
 
 class Node(object):

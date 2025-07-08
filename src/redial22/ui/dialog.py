@@ -2,9 +2,9 @@ import os
 from os.path import expanduser
 
 import urwid
-from redial.hostinfo import HostInfo
-from redial.tree.node import Node
-from redial.utils import get_public_ssh_keys
+from redial22.hostinfo import HostInfo
+from redial22.tree.node import Node
+from redial22.utils import get_public_ssh_keys
 from urwid.tests.util import SelectableText
 
 

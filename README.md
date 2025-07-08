@@ -1,34 +1,34 @@
-# redial
+# redial22
 
-[![Build Status](https://img.shields.io/pypi/pyversions/redial.svg)](https://pypi.org/project/redial/)
-[![License](https://img.shields.io/github/license/taypo/redial)](LICENSE)
-[![Version](https://img.shields.io/pypi/v/redial)](https://pypi.org/project/redial/)
+[![Build Status](https://img.shields.io/pypi/pyversions/redial22.svg)](https://pypi.org/project/redial22/)
+[![License](https://img.shields.io/github/license/FelipeMiranda/redial22)](LICENSE)
+[![Version](https://img.shields.io/pypi/v/redial22)](https://pypi.org/project/redial22/)
 
-redial is a simple shell application that manages your SSH sessions on Unix terminal.
+redial22 is a simple shell application that manages your SSH sessions on Unix terminal.
 
-![redial](https://github.com/taypo/redial/blob/master/doc/redial.png?raw=true)
+![redial22](https://github.com/FelipeMiranda/redial22/blob/master/doc/redial.png?raw=true)
 
 ## What's New
 
 ### 0.7 (19.12.2019)
 - Basic support for adding ssh keys to connections
 - Dynamic, Local and Remote port forwarding settings (only one of each can be defined for now)
-- UI state is restored at startup. Redial now remembers last selected connection and folder expanded/collapsed states
+- UI state is restored at startup. Redial22 now remembers last selected connection and folder expanded/collapsed states
 
 ## Installation
 
 ### Requirements
-- Python 3 or later to run redial.
+- Python 3 or later to run redial22.
 - [mc (Midnight Commander)](https://midnight-commander.org/) to use `F5 (Browse)` feature.
 
 ### Stable Version
 
 #### Installing via pip
 
-We recommend installing redial via pip:
+We recommend installing redial22 via pip:
 
 ```bash
-pip3 install redial
+pip3 install redial22
 ``` 
 
 ### Latest Version
@@ -38,7 +38,7 @@ pip3 install redial
 You can install the latest version from Git:
 
 ```bash
-pip3 install git+https://github.com/taypo/redial.git
+pip3 install git+https://github.com/FelipeMiranda/redial22.git
 ```
 
 ### Docker
@@ -48,13 +48,13 @@ pip3 install git+https://github.com/taypo/redial.git
 #### Build Dockerfile:
 
 ```bash
-docker build -t redial .
+docker build -t redial22 .
 ```
 
-#### Run redial in Docker Container
+#### Run redial22 in Docker Container
 
 ```bash
-docker run -it --rm redial:latest redial
+docker run -it --rm redial22:latest redial22
 ```
 
 ## Features
@@ -111,12 +111,12 @@ Press `CTRL` and `up/down` keys to move session or folder. **For macOS users:** 
 
 ## Notes
 
-Configuration file is stored in `~/.config/redial/sessions`. File format
+Configuration file is stored in `~/.config/redial22/sessions`. File format
 is same as the [SSH config](https://man.openbsd.org/ssh_config) file. Configuration file can be included in
 SSH config file with the following way (Make sure that `~/.ssh/config` file exists): 
 
 ```bash
-sed -i -e '1iInclude ~/.config/redial/sessions' ~/.ssh/config
+sed -i -e '1iInclude ~/.config/redial22/sessions' ~/.ssh/config
 ```
 
 ## Platforms
@@ -128,4 +128,4 @@ Windows is currently not supported.
 
 ## License
 
-redial is licensed under the [GNU General Public License v3.0](LICENSE).
+redial22 is licensed under the [GNU General Public License v3.0](LICENSE).

@@ -1,6 +1,6 @@
-from redial import xdg
-from redial.hostinfo import HostInfo
-from redial.tree.node import Node
+from redial22 import xdg
+from redial22.hostinfo import HostInfo
+from redial22.tree.node import Node
 import os, json
 
 

@@ -1,5 +1,5 @@
 import urwid
-from redial.tree.node import Node
+from redial22.tree.node import Node
 
 
 # TODO get rid of this if possible

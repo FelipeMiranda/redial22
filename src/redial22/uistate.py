@@ -1,5 +1,5 @@
-from redial.config import Config
-from redial.ui.tree import UITreeListBox, UITreeNode, UIParentNode
+from redial22.config import Config
+from redial22.ui.tree import UITreeListBox, UITreeNode, UIParentNode
 
 SELECTED = "selected"
 COLLAPSED = "collapsed"
