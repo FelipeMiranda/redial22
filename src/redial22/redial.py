@@ -17,10 +17,14 @@ from functools import partial
 
 class RedialApplication:
 
-    def __init__(self):
+    def __init__(self, root_folder=None):
         self.sessions = Config().load_from_file()
+        if root_folder is not None:
+            self.root = root_folder
+        else:
+            self.root = self.sessions
 
-        top_node = UIParentNode(self.sessions, key_handler=self.on_key_press)
+        top_node = UIParentNode(self.root, key_handler=self.on_key_press)
         self.walker = urwid.TreeWalker(top_node)
         self.listbox = UITreeListBox(self.walker)
 

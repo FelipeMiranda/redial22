@@ -12,13 +12,15 @@ Author: Bahadır Yağan
 
 ## What's New
 
-### 1.1.0 (07-09-2025)
+### 1.2.0 (07-09-2025)
 - Basic support for adding ssh keys to connections
 - Dynamic, Local and Remote port forwarding settings (only one of each can be defined for now)
 - UI state is restored at startup. Redial22 now remembers last selected connection and folder expanded/collapsed states
 - Support to use ProxyJump (Bastion servers)
 - Now you can remove a folder
 - Run on Docker container (updated with Debian Bookworm)
+- Now you can pass argument to CLI to direct connect to host
+- Now you can pass folder name as argument to open redial22 with only the folder showing on TUI
 
 ## Installation
 
@@ -166,3 +168,13 @@ Windows is currently not supported.
 ## License
 
 redial22 is licensed under the [GNU General Public License v3.0](LICENSE).
+
+## Command-Line Usage
+
+You can use redial22 from the command line in the following ways:
+
+- `redial22` — Launches the full TUI as normal.
+- `redial22 <connection-name>` — If an exact connection name is found, connects directly to that host.
+- `redial22 <folder-name>` — If an exact folder name is found (case-insensitive), opens the UI showing only that folder and its subfolders/connections.
+
+If the argument does not match any connection or folder, an error message is shown.
