@@ -1,25 +1,54 @@
-# redial22
+# redial22 improved
 
 [![Build Status](https://img.shields.io/pypi/pyversions/redial22.svg)](https://pypi.org/project/redial22/)
 [![License](https://img.shields.io/github/license/FelipeMiranda/redial22)](LICENSE)
 [![Version](https://img.shields.io/pypi/v/redial22)](https://pypi.org/project/redial22/)
 
-redial22 is a simple shell application that manages your SSH sessions on Unix terminal.
+redial22 improved is a simple shell application that manages your SSH sessions on Unix terminal.
+This application is a fork of the original [redail](https://github.com/taypo/redial) developed by:
+Author: Bahadır Yağan
 
 ![redial22](https://github.com/FelipeMiranda/redial22/blob/master/doc/redial.png?raw=true)
 
 ## What's New
 
-### 0.7 (19.12.2019)
+### 0.1.1 (19.12.2019)
 - Basic support for adding ssh keys to connections
 - Dynamic, Local and Remote port forwarding settings (only one of each can be defined for now)
 - UI state is restored at startup. Redial22 now remembers last selected connection and folder expanded/collapsed states
+- Support to use ProxyJump (Bastion servers)
+- Now you can remove a folder
+- Run on Docker container (updated with Debian Bookworm)
 
 ## Installation
 
 ### Requirements
 - Python 3 or later to run redial22.
 - [mc (Midnight Commander)](https://midnight-commander.org/) to use `F5 (Browse)` feature.
+
+#### Installing mc (Midnight Commander)
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get install mc
+```
+
+**CentOS/RHEL/Fedora:**
+```bash
+sudo yum install mc
+# or for newer versions:
+sudo dnf install mc
+```
+
+**macOS:**
+```bash
+brew install mc
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S mc
+```
 
 ### Stable Version
 
@@ -62,8 +91,14 @@ docker run -it --rm redial22:latest redial22
 - [x] Open a file manager to your remote host (Midnight Commander should be installed)
 - [x] Edit/Move/Delete connection
 - [x] Copy SSH Key to remote host
+- [x] ProxyJump (Bastion server)
+- [x] Type-to-search for connections and folders (see below)
 
-More features coming soon..
+### Type-to-Search (Incremental Search)
+
+Press `/` to enter search mode, then start typing the name or IP of a connection or folder. The first visible match will be selected automatically. Press `ESC` or `Enter` to exit search mode.
+
+**Note:** The search only works for folders and connections that are currently visible (i.e., inside expanded folders). If a folder is collapsed, its contents will not be found by search until you expand it.
 
 ### Connect to SSH Session (ENTER)
 
@@ -88,11 +123,13 @@ Press `F7` or click `F7 New Conn.` to add a ssh connection.
 
 Press `F5` or click `F5 Browse` to open mc (Midnight Commander) session. 
 
+**Note:** This feature requires `mc` (Midnight Commander) to be installed on your system. If you don't have it installed, you'll see an error message. See the installation instructions above.
+
 ![mc_gif](https://raw.githubusercontent.com/taypo/redial/master/doc/mc.gif)
 
 ### Remove Connection (F8)
 
-Press `F8` or click `F8 Remove` to remove a session. 
+Press `F8` or click `F8 Remove` to remove a session/folder. 
 
 ![remove_gif](https://raw.githubusercontent.com/taypo/redial/master/doc/remove.gif)
 

@@ -26,13 +26,13 @@ class RedialApplication:
 
         restore_ui_state(self.listbox, self.sessions)
 
+        self.header_text = urwid.Text("redial22")
         urwid.connect_signal(self.walker, "modified", lambda: on_focus_change(self.listbox))
-        header = urwid.Text("redial22")
         footer = init_footer(self.listbox)
 
         self.view = urwid.Frame(
             urwid.AttrWrap(self.listbox, 'body'),
-            header=urwid.AttrWrap(header, 'head'),
+            header=urwid.AttrWrap(self.header_text, 'head'),
             footer=footer)
 
         # Set screen to 256 color mode
@@ -44,6 +44,43 @@ class RedialApplication:
         self.command = None
         self.command_return_key = None  # type: int | None
         self.log = None
+        self.search_string = ""
+        self.in_search_mode = False
+
+    def reset_search(self):
+        self.search_string = ""
+        self.in_search_mode = False
+        self.header_text.set_text("redial22")
+
+    def search_and_focus(self, search_string):
+        # Traverse all nodes and focus the first match
+        def traverse(node, parent_path=None):
+            if parent_path is None:
+                parent_path = []
+            results = []
+            if hasattr(node, 'children') and node.children:
+                for child in node.children:
+                    results.extend(traverse(child, parent_path + [node]))
+            results.append((node, parent_path))
+            return results
+        all_nodes = traverse(self.sessions)
+        search_lower = search_string.lower()
+        for node, parent_path in all_nodes:
+            name = getattr(node, 'name', '') or ''
+            nodetype = getattr(node, 'nodetype', '') or ''
+            ip = getattr(getattr(node, 'hostinfo', None), 'ip', '') or ''
+            if search_lower in name.lower() or search_lower in ip.lower():
+                # Expand all parent folders by iterating through visible widgets
+                for parent in parent_path:
+                    if hasattr(parent, 'nodetype') and parent.nodetype == 'folder':
+                        widget = None
+                        if hasattr(parent, 'get_widget'):
+                            widget = parent.get_widget()
+                        if widget is not None and hasattr(widget, 'expanded'):
+                            widget.expanded = True
+                            widget.update_expanded_icon()
+                self.listbox.set_focus_to_node(node)
+                break
 
     def run(self):
         if self.command_return_key == 0 and self.log is not None:
@@ -52,17 +89,39 @@ class RedialApplication:
         self.loop.run()
 
     def on_key_press(self, key: str, w: UITreeWidget):
+        # Enter search mode with '/'
+        if not self.in_search_mode and key == '/':
+            self.in_search_mode = True
+            self.search_string = ""
+            self.header_text.set_text("Search: ")
+            return
+
+        # Handle search mode
+        if self.in_search_mode:
+            if key == 'esc' or key == 'enter':
+                self.reset_search()
+                return
+            elif key == 'backspace':
+                self.search_string = self.search_string[:-1]
+            elif len(key) == 1 and (key.isprintable()):
+                self.search_string += key
+            # Update header and focus
+            self.header_text.set_text(f"Search: {self.search_string}")
+            self.search_and_focus(self.search_string)
+            return
+
+        # Handle reserved command keys (only when not in search mode)
+        if key in ['q', 'Q', 'ctrl d']:
+            self.command = EXIT_REDIAL
+            raise urwid.ExitMainLoop()
+
         this_node = w.get_node().get_value()
         folder_node = this_node if (w.get_node().get_parent() is None or this_node.nodetype == "folder") \
             else w.get_node().get_parent().get_value()
 
         parent_node = None if w.get_node().get_parent() is None else w.get_node().get_parent().get_value()
 
-        if key in ['q', 'Q', 'ctrl d']:
-            self.command = EXIT_REDIAL
-            raise urwid.ExitMainLoop()
-
-        elif key == "enter":
+        if key == "enter":
             if isinstance(w.get_node(), UITreeNode):
                 self.command = w.get_node().get_value().hostinfo.get_ssh_command()
                 raise urwid.ExitMainLoop()
