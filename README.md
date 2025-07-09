@@ -12,7 +12,7 @@ Author: Bahadır Yağan
 
 ## What's New
 
-### 0.1.1 (19.12.2019)
+### 1.1.0 (07-09-2025)
 - Basic support for adding ssh keys to connections
 - Dynamic, Local and Remote port forwarding settings (only one of each can be defined for now)
 - UI state is restored at startup. Redial22 now remembers last selected connection and folder expanded/collapsed states
